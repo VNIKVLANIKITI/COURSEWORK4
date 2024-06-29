@@ -162,3 +162,7 @@ cython_debug/
 .idea/
 .idea
 
+__pycache__
+*.pyc
+*.pyo
+*.pyd
