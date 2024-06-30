@@ -8,16 +8,16 @@ def get_vacancies_by_salary(vacancies, salary_range):
         return vacancies
     salary_values = salary_range.split('-')
     if len(salary_values) == 1:
-        min_salary = max_salary  = int(salary_values[0])
+        min_salary = max_salary = int(salary_values[0])
     elif len(salary_values) == 2:
-        min_salary, max_salary  = map(int, salary_values)
+        min_salary, max_salary = map(int, salary_values)
     else:
         print("Неверный формат диапазона зарплат.")
         return vacancies
 
     return [vacancy for vacancy in vacancies if
             vacancy.get('salary_from', 0) >= min_salary and vacancy.get('salary_from',
-                                                                            float('inf')) <= max_salary]
+                                                                        float('inf')) <= max_salary]
 
 
 def sort_vacancies(vacancies):
@@ -39,4 +39,3 @@ def print_vacancies(vacancies):
             print()
     else:
         print("Нет подходящих вакансий")
-
