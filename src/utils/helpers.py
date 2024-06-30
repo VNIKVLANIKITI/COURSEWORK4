@@ -1,31 +1,31 @@
-def filter_vacancies(vacancies, ключевые_слова):
-    return [вакансия for вакансия in vacancies if
-            any(ключ.lower() in вакансия['description'].lower() for ключ in ключевые_слова)]
+def filter_vacancies(vacancies, keywords):
+    return [vacancy for vacancy in vacancies if
+            any(key.lower() in vacancy['description'].lower() for key in keywords)]
 
 
-def get_vacancies_by_salary(vacancies, диапазон_зарплат):
-    if not диапазон_зарплат:
+def get_vacancies_by_salary(vacancies, salary_range):
+    if not salary_range:
         return vacancies
-    значения_зарплаты = диапазон_зарплат.split('-')
-    if len(значения_зарплаты) == 1:
-        мин_зарплата = макс_зарплата = int(значения_зарплаты[0])
-    elif len(значения_зарплаты) == 2:
-        мин_зарплата, макс_зарплата = map(int, значения_зарплаты)
+    salary_values = salary_range.split('-')
+    if len(salary_values) == 1:
+        min_salary = max_salary  = int(salary_values[0])
+    elif len(salary_values) == 2:
+        min_salary, max_salary  = map(int, salary_values)
     else:
         print("Неверный формат диапазона зарплат.")
         return vacancies
 
-    return [вакансия for вакансия in vacancies if
-            вакансия.get('salary_from', 0) >= мин_зарплата and вакансия.get('salary_from',
-                                                                            float('inf')) <= макс_зарплата]
+    return [vacancy for vacancy in vacancies if
+            vacancy.get('salary_from', 0) >= min_salary and vacancy.get('salary_from',
+                                                                            float('inf')) <= max_salary]
 
 
 def sort_vacancies(vacancies):
-    return sorted(vacancies, key=lambda вакансия: вакансия.get('salary_from', 0), reverse=True)
+    return sorted(vacancies, key=lambda vacancy: vacancy.get('salary_from', 0), reverse=True)
 
 
-def get_top_vacancies(vacancies, верхняя_граница):
-    return vacancies[:верхняя_граница]
+def get_top_vacancies(vacancies, upper_bound):
+    return vacancies[:upper_bound]
 
 
 def print_vacancies(vacancies):
